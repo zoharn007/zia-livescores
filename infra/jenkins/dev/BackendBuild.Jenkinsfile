@@ -11,7 +11,7 @@ pipeline {
     REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
     IMAGE_TAG = "0.0.$BUILD_NUMBER"
     IMAGE_NAME = "zia-backend"
-    WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendBuild/"
+    WORKSPACE = "/var/lib/jenkins/workspace/zia_dev/BackendBuild"
     }
 
     stages {
@@ -28,7 +28,7 @@ pipeline {
         stage('Snyx Check') {
             steps {
                 withCredentials([string(credentialsId: 'Snyx', variable: 'SNYK_TOKEN')]) {
-                    sh 'snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=critical --file=/home/ec2-user/workspace/zia-dev/BackendBuild/services/backend/Dockerfile'
+                    sh 'snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=critical --file=$WORKSPACE/services/backend/Dockerfile'
                 }
             }
         }
