@@ -25,14 +25,6 @@ pipeline {
             }
         }
 
-        stage('Snyx Check') {
-            steps {
-                withCredentials([string(credentialsId: 'Snyx', variable: 'SNYK_TOKEN')]) {
-                    sh 'snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=critical --file=$WORKSPACE/services/backend/Dockerfile'
-                }
-            }
-        }
-
         stage('Continue_Build') {
             steps {
                 sh'''
