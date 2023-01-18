@@ -18,8 +18,6 @@ dynamoClient = boto3.client('dynamodb', region_name='eu-west-1')
 
 snsClient = boto3.client('sns', region_name='eu-west-1')
 
-snsClient = boto3.client('sns')
-
 app = Flask(__name__)
 
 
