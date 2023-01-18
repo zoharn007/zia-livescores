@@ -12,9 +12,11 @@ import random
 from decimal import Decimal
 import os
 
-dynamoResource = boto3.resource('dynamodb')
+dynamoResource = boto3.resource('dynamodb', region_name='eu-west-1')
 table = dynamoResource.Table('LiveScore')
-dynamoClient = boto3.client('dynamodb')
+dynamoClient = boto3.client('dynamodb', region_name='eu-west-1')
+
+snsClient = boto3.client('sns', region_name='eu-west-1')
 
 snsClient = boto3.client('sns')
 
