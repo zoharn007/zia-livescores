@@ -3,6 +3,6 @@ WORKDIR /app
 ENV APP_PATH=/app/services/backend
 COPY . $APP_PATH
 RUN apt-get update && apt-get install -y awscli
-RUN pip install -r $APP_PATH/requirements.txt
+RUN pip install -r /app/services/backend/requirements.txt
 
 CMD ["python3", "/app/services/backend/Backend.py"]
