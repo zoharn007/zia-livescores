@@ -12,6 +12,9 @@ pipeline {
     stages {
         stage('Backend Deploy') {
             steps {
+                    sh '''
+                    aws eks --region eu-west-1 update-kubeconfig --name zia-eks
+                    '''
                    {
                     sh '''
                     aws eks --region eu-west-1 update-kubeconfig --name zia-eks
