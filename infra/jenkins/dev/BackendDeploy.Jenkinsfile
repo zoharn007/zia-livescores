@@ -19,6 +19,14 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 echo 'Deploy to EKS'
+                sh '''
+                K8S_CONFIGS=infra/k8s
+                # replace placeholders in YAML k8s files
+                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml APP_ENV $APP_ENV
+                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
+                # apply the configurations to k8s cluster
+                kubectl apply -f $K8S_CONFIGS/backend.yaml
+                '''
             }
         }
     }
