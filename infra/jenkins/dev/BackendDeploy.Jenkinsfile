@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('Bot Deploy') {
+        stage('Backend Deploy') {
             steps {
                 print("ok")
                    {
