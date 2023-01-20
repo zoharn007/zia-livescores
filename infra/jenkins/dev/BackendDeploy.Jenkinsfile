@@ -1,13 +1,7 @@
 properties([parameters([string('BACKEND_IMAGE_NAME')])])
 
 pipeline {
-    agent {
-        docker {
-        label 'jenkins-general-docker'
-        image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:1'
-        args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         APP_ENV = "dev"
@@ -20,9 +14,8 @@ pipeline {
     stages {
         stage('Backend Deploy') {
             steps {
-                withCredentials([
-                    file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')
-                ]) {
+                 aws eks --region eu-west-1 update-kubeconfig --name zia-eks
+                 {
                     sh '''
                     K8S_CONFIGS=infra/k8s
 
