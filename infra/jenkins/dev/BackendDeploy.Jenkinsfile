@@ -10,16 +10,14 @@ pipeline {
     }
 
     stages {
-        stage('Backend Deploy') {
+        stage('Example Build') {
             steps {
-                    sh '''
-                    aws eks --region eu-west-1 update-kubeconfig --name zia-eks
-                    '''
-                   {
-                    sh '''
-                    aws eks --region eu-west-1 update-kubeconfig --name zia-eks
-                    '''
-                }
+                echo 'Hello, Maven'
+            }
+        }
+        stage('Example Test') {
+            steps {
+                echo 'Hello, JDK'
             }
         }
     }
