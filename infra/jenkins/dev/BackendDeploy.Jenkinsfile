@@ -10,9 +10,10 @@ pipeline {
     }
 
     stages {
-        stage('Example Build') {
+        stage('Connect to EKS') {
             steps {
-                echo 'Hello, Maven'
+                echo 'Connect to EKS'
+                sh aws eks --region eu-west-1 update-kubeconfig --name zia-eks
             }
         }
         stage('Example Test') {
