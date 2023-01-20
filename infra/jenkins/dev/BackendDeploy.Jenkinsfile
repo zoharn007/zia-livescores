@@ -13,12 +13,12 @@ pipeline {
         stage('Connect to EKS') {
             steps {
                 echo 'Connect to EKS'
-                sh aws eks --region eu-west-1 update-kubeconfig --name zia-eks
+                sh 'aws eks --region eu-west-1 update-kubeconfig --name zia-eks'
             }
         }
-        stage('Example Test') {
+        stage('Deploy to EKS') {
             steps {
-                echo 'Hello, JDK'
+                echo 'Deploy to EKS'
             }
         }
     }
