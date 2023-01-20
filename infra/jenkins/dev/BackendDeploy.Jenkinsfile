@@ -1,14 +1,19 @@
-properties([parameters([string('BACKEND_IMAGE_NAME')])])
-
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'BACKEND_IMAGE_NAME')
+    }
+
     stages {
         stage('Backend Deploy') {
-            steps
+            steps {
+                 {
                     sh '''
-                    print("ok")
+                    print('ok')
                     '''
+                }
+            }
         }
     }
 }
