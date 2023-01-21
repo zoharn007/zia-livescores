@@ -24,10 +24,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                pwd
                 cd $WORKSPACE
-                aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $REGISTRY_URL
-                docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/backend/Dockerfile
+                pwd
                 '''
             }
         }
@@ -35,8 +33,8 @@ pipeline {
         stage('Continue_Build') {
             steps {
                 sh'''
-                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                cd $WORKSPACE
+                pwd
                 '''
             }
             post {
