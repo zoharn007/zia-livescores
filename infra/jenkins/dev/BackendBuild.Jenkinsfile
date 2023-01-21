@@ -1,6 +1,10 @@
 pipeline {
     agent {
-        label 'jenkins-general-docker'
+        docker{
+            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:1'
+            label 'jenkins-general-docker'
+            args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+        }
     }
     environment {
         REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
