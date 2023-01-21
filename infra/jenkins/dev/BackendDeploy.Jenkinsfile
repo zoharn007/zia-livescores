@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Deploy to EKS'
                 sh '''
-                K8S_CONFIGS=infra/k8s
+                K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/BackendDeploy/infra/k8s
                 # replace placeholders in YAML k8s files
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml APP_ENV $APP_ENV
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
