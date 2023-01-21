@@ -19,8 +19,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                cd $WORKSPACE
                 pwd
+                cd $WORKSPACE
+                docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/backend/Dockerfile
                 '''
             }
         }
@@ -28,8 +29,8 @@ pipeline {
         stage('Continue_Build') {
             steps {
                 sh'''
-                cd $WORKSPACE
-                pwd
+                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                 '''
             }
             post {
