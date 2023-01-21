@@ -17,5 +17,20 @@ pipeline {
                 '''
             }
         }
+        stage('Continue_Build') {
+            steps {
+                sh'''
+                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+            post {
+                always {
+                sh '''
+                docker image prune -af --filter "until=24h"
+                '''
+                }
+            }
+        }
     }
 }
