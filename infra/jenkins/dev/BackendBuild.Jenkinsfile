@@ -1,17 +1,11 @@
 pipeline {
-    agent {
-        docker{
-            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:5'
-            label 'jenkins-general-docker'
-            args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     environment {
         REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
         IMAGE_NAME = "zia-backend"
-        WORKSPACE2 = "/var/lib/jenkins/workspace/zia_dev/BackendBuild"
-        WORKSPACE = "/home/ec2-user/workspace/zia_dev/BackendBuild"
+        WORKSPACE = "/var/lib/jenkins/workspace/zia_dev/BackendBuild"
+        WORKSPACE2 = "/home/ec2-user/workspace/zia_dev/BackendBuild"
     }
     stages {
         stage('Build') {
