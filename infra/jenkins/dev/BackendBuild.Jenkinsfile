@@ -32,5 +32,12 @@ pipeline {
                 }
             }
         }
+        stage('Trigger Deploy') {
+            steps {
+                build job: 'BackendDeploy', wait: false, parameters: [
+                    string(name: 'BACKEND_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
+                ]
+            }
+        }
     }
 }
