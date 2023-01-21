@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker{
-            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:1'
+            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:5'
             label 'jenkins-general-docker'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
