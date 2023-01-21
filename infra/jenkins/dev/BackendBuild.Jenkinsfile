@@ -18,6 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
+                pwd
                 cd $WORKSPACE
                 docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/backend/Dockerfile
                 '''
