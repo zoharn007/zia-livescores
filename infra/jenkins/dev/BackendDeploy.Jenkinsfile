@@ -25,7 +25,7 @@ pipeline {
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml APP_ENV $APP_ENV
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
                 # apply the configurations to k8s cluster
-                bash pwd
+                pwd
                 bash kubectl apply -f $K8S_CONFIGS/backend.yaml
                 '''
             }
