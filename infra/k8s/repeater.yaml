@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
         - name: repeater-app-{{APP_ENV}}
-          image: {{REPEATER_IMAGE_NAME}}
+          image: {{REPEATER_IMAGE}}
