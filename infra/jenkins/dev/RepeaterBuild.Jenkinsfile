@@ -39,7 +39,8 @@ pipeline {
             steps {
                 build job: 'RepeaterDeploy', wait: false, parameters: [
                     string(name: 'REPEATER_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
-                ]
+                    ]
+                }
             }
         }
     }
