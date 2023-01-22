@@ -12,8 +12,10 @@ pipeline {
     stages {
         stage('Connect to EKS') {
             steps {
+                withCredentials([file(credentialsId: 'kubeconfig2', variable: 'KUBECONFIG')])
                 echo 'Connect to EKS'
                 sh 'aws eks --region eu-west-1 update-kubeconfig --name zia-eks'
+
             }
         }
         stage('Deploy to EKS') {
@@ -26,7 +28,7 @@ pipeline {
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
                 # apply the configurations to k8s cluster
                 pwd
-                /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/backend.yaml
+                /var/lib/jenkins/logs/kubectl apply --kubeconfig ${KUBECONFIG} -f $K8S_CONFIGS/backend.yaml
                 '''
             }
         }
