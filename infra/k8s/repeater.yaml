@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: worker-{{APP_ENV}}
+  name: repeater-app-{{APP_ENV}}
   namespace: {{APP_ENV}}
   labels:
-    app: worker-{{APP_ENV}}
+    app: repeater-app-{{APP_ENV}}
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: worker-{{APP_ENV}}
+      app: repeater-app-{{APP_ENV}}
   template:
     metadata:
       labels:
-        app: worker-{{APP_ENV}}
+        app: repeater-app-{{APP_ENV}}
     spec:
       containers:
-        - name: worker-{{APP_ENV}}
-          image: {{WORKER_IMAGE}}
+        - name: repeater-app-{{APP_ENV}}
+          image: {{REPEATER_IMAGE_NAME}}
