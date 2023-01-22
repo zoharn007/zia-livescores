@@ -17,6 +17,7 @@ pipeline {
                 ]) {
                     echo 'withcred worked'
                     sh '''
+                    chmod u+w kubeconfig2
                     aws eks --region eu-west-1 update-kubeconfig --name zia-eks
                     # replace placeholders in YAML k8s files
                     K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/BackendDeploy/infra/k8s
