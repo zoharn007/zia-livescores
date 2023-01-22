@@ -16,7 +16,7 @@ pipeline {
                     file(credentialsId: 'kubeconfig2', variable: 'KUBECONFIG')
                 ]) {
                     echo 'Connect to EKS'
-                    sh 'aws eks --region eu-west-1 update-kubeconfig2 --name zia-eks'
+                    sh 'aws eks --region eu-west-1 update-kubeconfig --name zia-eks'
                     sh '''
                     # replace placeholders in YAML k8s files
                     K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/BackendDeploy/infra/k8s
