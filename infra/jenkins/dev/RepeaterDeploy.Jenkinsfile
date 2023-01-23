@@ -18,22 +18,20 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 withCredentials([
-                    string(credentialsId: 'apikey', variable: 'API_KEY'),
-              ]) {
-                echo 'Deploy to EKS'
-                sh '''
-                K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/RepeaterDeploy/infra/k8s
-
-                # replace placeholders in YAML k8s files
-                bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APP_ENV $APP_ENV
-
-                # apply the configurations to k8s cluster
-                bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml REPEATER_IMAGE $REPEATER_IMAGE_NAME
-                bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml API_KEY $(echo $API_KEY | base64)
-                pwd
-                /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml
-                '''
-                }
+                    string(credentialsId: 'apikey', variable: 'APIKEY'),
+                ]) {
+                    echo 'Deploy to EKS'
+                    sh '''
+                    K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/RepeaterDeploy/infra/k8s
+                    # replace placeholders in YAML k8s files
+                    bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APP_ENV $APP_ENV
+                    bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml REPEATER_IMAGE $REPEATER_IMAGE_NAME
+                    bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APIKEY $(echo -n $APIKEY | base64)
+                    # apply the configurations to k8s cluster
+                    pwd
+                    /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml
+                    '''
+                    }
             }
         }
     }
