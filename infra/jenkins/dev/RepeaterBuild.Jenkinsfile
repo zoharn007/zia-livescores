@@ -10,9 +10,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withCredentials([
-                    file(credentialsId: 'API2', variable: '.env')
-                ]) {
                 sh '''
                     pwd
                     cd $WORKSPACE
@@ -20,7 +17,6 @@ pipeline {
                 '''
             }
         }
-    }
         stage('Continue_Build') {
             steps {
                 sh'''
@@ -36,7 +32,6 @@ pipeline {
                 }
             }
         }
-
         stage('Trigger Deploy') {
             steps {
                 build job: 'RepeaterDeploy', wait: false, parameters: [
