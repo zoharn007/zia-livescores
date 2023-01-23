@@ -29,7 +29,7 @@ pipeline {
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APIKEY $(echo -n $APIKEY | Base91)
                     # apply the configurations to k8s cluster
                     pwd
-                    /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml
+                    /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml --validate=false
                     '''
                     }
             }
