@@ -4,9 +4,9 @@ import requests
 import json
 import sys
 sys.path.insert(0, '/app/secrets')
+import key
 sys.path.insert(0, '/app/secrets2')
-
-
+import key2
 def GetDataFromFootballAPI():
 
     baseUrl = "https://livescore-api.com/api-client/"
