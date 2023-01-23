@@ -5,8 +5,7 @@ import json
 import sys
 sys.path.insert(0, '/app/secrets')
 sys.path.insert(0, '/app/secrets2')
-import key
-import key2
+
 
 def GetDataFromFootballAPI():
 
