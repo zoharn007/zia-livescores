@@ -1,15 +1,16 @@
 from time import sleep
-from decouple import config
+import key
 import time
 import requests
 import json
-
+import sys
+sys.path.insert(0, '/app/secrets')
 
 def GetDataFromFootballAPI():
 
     baseUrl = "https://livescore-api.com/api-client/"
-    apiKey = config("apiKey")
-    apiSecret = config("apiSecret")
+    apiKey = key.apiKey
+    apiSecret =  key.apiSecret
     keyParam = { "key" : apiKey, "secret" : apiSecret }
 
     response = requests.get(baseUrl + "scores/live.json", params=keyParam) # READ
