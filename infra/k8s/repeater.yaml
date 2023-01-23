@@ -11,6 +11,19 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: repeater-app-{{APP_ENV}}
+  namespace: {{APP_ENV}}
+  labels:
+    app: repeater-app-{{APP_ENV}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: repeater-app-{{APP_ENV}}
+  template:
+    metadata:
+      labels:
+        app: repeater-app-{{APP_ENV}}
     spec:
       containers:
         - name: repeater-app-{{APP_ENV}}
