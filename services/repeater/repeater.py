@@ -12,7 +12,7 @@ def GetDataFromFootballAPI():
 
     baseUrl = "https://livescore-api.com/api-client/"
     apiKey = key.apiKey
-    apiSecret =  key2.apiSecret
+    apiSecret =  key.apiSecret
     keyParam = { "key" : apiKey, "secret" : apiSecret }
 
     response = requests.get(baseUrl + "scores/live.json", params=keyParam) # READ
