@@ -1,4 +1,13 @@
 apiVersion: apps/v1
+kind: Secret
+metadata:
+  name: apikey
+  namespace: {{APP_ENV}}
+type: Opaque
+data:
+  token: {{API_KEY}}
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: repeater-app-{{APP_ENV}}
@@ -15,6 +24,13 @@ spec:
       labels:
         app: repeater-app-{{APP_ENV}}
     spec:
+      containers:
+        - name: repeater-app-{{APP_ENV}}
+          image: {{REPEATER_IMAGE_NAME}}
+          volumeMounts:
+            - name: apikey
+              mountPath: "/app/secrets"
+              readOnly: true
       volumes:
         - name: apikey
           secret:
@@ -22,13 +38,37 @@ spec:
             items:
               - key: token
                 path: ".env"
-      containers:
-        - name: repeater-app-{{APP_ENV}}
-          image: {{REPEATER_IMAGE}}
-          envFrom:
-            - secretRef:
-                name: apikey
-          volumeMounts:
-            - name: apikey
-              mountPath: /app/secrets
-              readOnly: true
+
+
+
+
+
+#  labels:
+#    app: repeater-app-{{APP_ENV}}
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: repeater-app-{{APP_ENV}}
+#  template:
+#    metadata:
+#      labels:
+#        app: repeater-app-{{APP_ENV}}
+#    spec:
+#      volumes:
+#        - name: apikey
+#          secret:
+#            secretName: apikey
+#            items:
+#              - key: token
+#                path: ".env"
+#      containers:
+#        - name: repeater-app-{{APP_ENV}}
+#          image: {{REPEATER_IMAGE}}
+#          envFrom:
+#            - secretRef:
+#                name: apikey
+#          volumeMounts:
+#            - name: apikey
+#              mountPath: /app/secrets
+#              readOnly: true
