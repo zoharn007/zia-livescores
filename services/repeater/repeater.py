@@ -4,13 +4,15 @@ import requests
 import json
 import sys
 sys.path.insert(0, '/app/secrets')
+sys.path.insert(0, '/app/secrets2')
 import key
+import key2
 
 def GetDataFromFootballAPI():
 
     baseUrl = "https://livescore-api.com/api-client/"
     apiKey = key.apiKey
-    apiSecret =  key.apiSecret
+    apiSecret =  key2.apiSecret
     keyParam = { "key" : apiKey, "secret" : apiSecret }
 
     response = requests.get(baseUrl + "scores/live.json", params=keyParam) # READ
