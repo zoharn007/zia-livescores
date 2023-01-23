@@ -29,7 +29,7 @@ spec:
           image: {{REPEATER_IMAGE_NAME}}
           volumeMounts:
             - name: apikey
-              mountPath: "/app/secrets"
+              mountPath: "/app/.env"
               readOnly: true
       volumes:
         - name: apikey
