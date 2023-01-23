@@ -1,10 +1,10 @@
 from time import sleep
-import key
 import time
 import requests
 import json
 import sys
 sys.path.insert(0, '/app/secrets')
+import key
 
 def GetDataFromFootballAPI():
 
