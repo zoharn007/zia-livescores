@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+data:
+  apikey: base64EncodedValue
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,3 +25,9 @@ spec:
       containers:
         - name: repeater-app-{{APP_ENV}}
           image: {{REPEATER_IMAGE}}
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: apikey
