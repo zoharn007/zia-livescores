@@ -21,14 +21,14 @@ pipeline {
                     pwd
                     cd $WORKSPACE
                     docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/backend/Dockerfile
+                    docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                    docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
         stage('Continue_Build') {
             steps {
                 sh'''
-                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                 '''
             }
             post {
