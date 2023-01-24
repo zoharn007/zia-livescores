@@ -19,7 +19,7 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'apikey', variable: 'APIKEY'),
-                    string(credentialsId: 'apisecret', variable: 'APISECRET'),
+                    string(credentialsId: 'apisecret', variable: 'APIKEY2'),
                 ]) {
                     echo 'Deploy to EKS'
                     sh '''
