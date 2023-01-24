@@ -10,13 +10,12 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: apisecret
+  name: apikey2
   namespace: {{APP_ENV}}
 type: Opaque
 data:
-  token: {{APISECRET}}
+  token: {{APIKEY2}}
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,7 +52,7 @@ spec:
                 path: "key.py"
         - name: repeater-token2
           secret:
-            secretName: apisecret
+            secretName: apikey2
             items:
               - key: token
                 path: "key2.py"
