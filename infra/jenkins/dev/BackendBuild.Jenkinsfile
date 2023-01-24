@@ -11,8 +11,8 @@ pipeline {
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
         IMAGE_NAME = "zia-backend"
         WORKSPACE3 = "/home/ec2-user/workspace/BackendBuild"
-        WORKSPACE1 = "/var/lib/jenkins/workspace/zia_dev/BackendBuild"
-        WORKSPACE = "/home/ec2-user/workspace/zia_dev/BackendBuild"
+        WORKSPACE1 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"
+        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendBuild"
     }
     stages {
         stage('Build') {
