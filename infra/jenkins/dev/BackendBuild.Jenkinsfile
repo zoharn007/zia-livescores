@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-            docker {
-            label 'jenkins-general-docker'
-            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/ariel-jenkins-agent2:4'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     environment {
         REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
