@@ -7,15 +7,6 @@ type: Opaque
 data:
   token: {{APIKEY}}
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: apikey2
-  namespace: {{APP_ENV}}
-type: Opaque
-data:
-  token: {{APIKEY2}}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -28,7 +28,6 @@ pipeline {
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APP_ENV $APP_ENV
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml REPEATER_IMAGE $REPEATER_IMAGE_NAME
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APIKEY $(echo -n $APIKEY | base64)
-                    bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APIKEY2 $(echo -n $APIKEY2 | base64)
                     # apply the configurations to k8s cluster
                     pwd
                     /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml
