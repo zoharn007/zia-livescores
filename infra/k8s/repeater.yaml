@@ -25,8 +25,6 @@ spec:
         app: repeater-app-{{APP_ENV}}
     spec:
       containers:
-        - name: repeater-app-{{APP_ENV}}
-          image: {{REPEATER_IMAGE}}
           volumeMounts:
             - name: repeater-token
               mountPath: "/app/secrets"
