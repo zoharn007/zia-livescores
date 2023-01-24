@@ -76,4 +76,5 @@ while True:
         moveToHistory = True
 
     GetDataFromFootballAPIAndUpdateDatabase()
+    print("still running")
     sleep(60)
