@@ -44,8 +44,8 @@ spec:
         - name: repeater-app-{{APP_ENV}}
           image: {{REPEATER_IMAGE}}
           volumeMounts:
-            - name: repeater-token
-              mountPath: "/app/secrets/"
+            - name: repeater-token2
+              mountPath: "/app/secrets2/"
               readOnly: true
       volumes:
         - name: repeater-token
@@ -54,7 +54,7 @@ spec:
             items:
               - key: token
                 path: "key.py"
-        - name: repeater-token
+        - name: repeater-token2
           secret:
             secretName: apisecret
             items:
