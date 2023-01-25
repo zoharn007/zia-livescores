@@ -8,6 +8,10 @@ pipeline {
     }
     environment {
         APP_ENV = "dev"
+//          on jenkins
+        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"
+//         on jenkins agent
+        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendDeploy"
     }
 
     parameters {
@@ -25,7 +29,7 @@ pipeline {
             steps {
                 echo 'Deploy to EKS'
                 sh '''
-                K8S_CONFIGS=/var/lib/jenkins/workspace/zia-dev/BackendDeploy/infra/k8s
+                K8S_CONFIGS=$WORKSPACE/infra/k8s
 
                 # replace placeholders in YAML k8s files
                 bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml APP_ENV $APP_ENV
