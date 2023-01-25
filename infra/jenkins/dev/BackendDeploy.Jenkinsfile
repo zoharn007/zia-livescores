@@ -26,7 +26,7 @@ pipeline {
 
                 # apply the configurations to k8s cluster
 
-                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
+                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE_NAME $BACKEND_IMAGE_NAME
                 /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/backend.yaml
                 '''
             }
