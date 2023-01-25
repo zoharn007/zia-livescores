@@ -1,5 +1,4 @@
 pipeline {
-    agent any
     environment {
         APP_ENV = "dev"
 //          on jenkins
