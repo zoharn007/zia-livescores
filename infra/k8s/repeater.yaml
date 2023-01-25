@@ -54,7 +54,7 @@ spec:
             items:
               - key: token
                 path: "key.py"
-        - name: repeater-token2
+        - name: repeater-token
           secret:
             secretName: apisecret
             items:
