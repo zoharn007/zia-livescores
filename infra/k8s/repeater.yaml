@@ -7,6 +7,16 @@ type: Opaque
 data:
   token: {{APIKEY}}
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: apisecret
+  namespace: {{APP_ENV}}
+type: Opaque
+data:
+  token: {{APISECRET}}
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,9 +35,17 @@ spec:
         app: repeater-app-{{APP_ENV}}
     spec:
       containers:
+        - name: repeater-app-{{APP_ENV}}
+          image: {{REPEATER_IMAGE}}
           volumeMounts:
             - name: repeater-token
               mountPath: "/app/secrets"
+              readOnly: true
+        - name: repeater-app-{{APP_ENV}}
+          image: {{REPEATER_IMAGE}}
+          volumeMounts:
+            - name: repeater-token
+              mountPath: "/app/secrets2"
               readOnly: true
       volumes:
         - name: repeater-token
@@ -36,3 +54,9 @@ spec:
             items:
               - key: token
                 path: "key.py"
+        - name: repeater-token
+          secret:
+            secretName: apisecret
+            items:
+              - key: token
+                path: "key2.py"

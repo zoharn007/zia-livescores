@@ -19,7 +19,7 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'apikey', variable: 'APIKEY'),
-                    string(credentialsId: 'apisecret', variable: 'APIKEY2'),
+                    string(credentialsId: 'apisecret', variable: 'APISECRET'),
                 ]) {
                     echo 'Deploy to EKS'
                     sh '''
@@ -28,6 +28,7 @@ pipeline {
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APP_ENV $APP_ENV
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml REPEATER_IMAGE $REPEATER_IMAGE_NAME
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APIKEY $(echo -n $APIKEY | base64)
+                    bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APISECRET $(echo -n $APISECRET | base64)
                     # apply the configurations to k8s cluster
                     pwd
                     /var/lib/jenkins/logs/kubectl apply -f $K8S_CONFIGS/repeater.yaml
