@@ -1,5 +1,5 @@
 pipeline {
-    agent any {
+    agent {
             docker {
             label 'jenkins-general-docker'
             image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/ariel-jenkins-agent2:4'
