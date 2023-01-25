@@ -21,6 +21,7 @@ pipeline {
                 sh '''
                     pwd
                     cd $WORKSPACE
+                    aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $REGISTRY_URL
                     docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/repeater/Dockerfile
                 '''
             }
