@@ -1,2 +1,1 @@
-latest ok
-run all pipelines from docker agent
+Try Ingress
