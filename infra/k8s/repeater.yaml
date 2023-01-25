@@ -53,7 +53,8 @@ spec:
             secretName: apikey
             items:
               - key: token
-                path: "key3.py"
+                path: "key.py"
+      volumes:
         - name: repeatertke
           secret:
             secretName: apisecret
