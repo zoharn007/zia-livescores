@@ -23,7 +23,7 @@ pipeline {
                 ]) {
                     echo 'Deploy to EKS'
                     sh '''
-                    K8S_CONFIGS=/var/lib/jenkins/workspace/zia_dev/RepeaterDeploy/infra/k8s
+                    K8S_CONFIGS=/var/lib/jenkins/workspace/zia-dev/RepeaterDeploy/infra/k8s
                     # replace placeholders in YAML k8s files
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APP_ENV $APP_ENV
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml REPEATER_IMAGE $REPEATER_IMAGE_NAME
