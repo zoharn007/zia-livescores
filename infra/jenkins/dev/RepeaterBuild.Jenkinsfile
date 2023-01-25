@@ -10,8 +10,10 @@ pipeline {
         REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
         IMAGE_NAME = "zia-repeater"
-        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"  #   on jenkins
-        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendBuild" #   on jenkins agent
+//  on jenkins
+        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"
+//  on jenkins agent
+        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendBuild"
     }
     stages {
         stage('Build') {
