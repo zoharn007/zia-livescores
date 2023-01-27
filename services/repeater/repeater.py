@@ -23,7 +23,7 @@ def GetDataFromFootballAPI():
 
 
 def UpdateDatabaseWithMatchInformation(match):
-    baseUrlBackend = "backend-app-dev.dev:5000/"
+    baseUrlBackend = "backend-app-dev.dev:5000"
 
     try:
         parameters = \
