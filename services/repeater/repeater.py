@@ -23,7 +23,7 @@ def GetDataFromFootballAPI():
 
 
 def UpdateDatabaseWithMatchInformation(match):
-    baseUrlBackend = "backend-app-dev.dev:5000"
+    baseUrlBackend = "http://backend-app-dev.dev:5000/"
 
     try:
         parameters = \
@@ -31,7 +31,7 @@ def UpdateDatabaseWithMatchInformation(match):
                 "id": str(match['id']),
                 "away_name": match['away_name'],
                 "competition_name": match['competition_name'],
-                "country": match['country']['name'],
+                "country": match['location'],
                 "home_name": match['home_name'],
                 "location": match['location'],
                 "score": match['score'],
