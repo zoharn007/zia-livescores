@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.11.1-slim-bullseye
 WORKDIR /app
 ENV APP_PATH=/app/services/repeater
 COPY . .
