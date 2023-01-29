@@ -4,6 +4,7 @@ ENV APP_PATH=/app/services/repeater
 COPY . .
 
 RUN apt-get update
+RUN apt remove -fy libaom0:amd64
 RUN pip install --upgrade pip
 RUN pip install -r /app/services/repeater/requirements.txt
 
