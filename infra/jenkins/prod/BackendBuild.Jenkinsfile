@@ -26,51 +26,33 @@ pipeline {
                 '''
             }
         }
-
-    stage('Snyx Check') {
-    steps {
-            withCredentials([string(credentialsId: 'Snyx', variable: 'SNYK_TOKEN')]) {
-                sh 'snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=critical --file=/home/ec2-user/workspace/prod/services/backend/Dockerfile'
+        stage('Snyx Check') {
+            steps {
+                withCredentials([string(credentialsId: 'Snyx', variable: 'SNYK_TOKEN')]) {
+                    sh 'snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=critical --file=/home/ec2-user/workspace/zia-prod/BackendBuild/services/backend/Dockerfile'
+                }
             }
         }
-    }
-
-    stage('Continue_Build') {
-        steps {
-            sh'''
-            docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-            docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-            '''
-        }
-
-        post {
-            always {
-            sh '''
-            docker image prune -a --filter "until=24h"
-            '''
+        stage('Continue_Build') {
+            steps {
+                sh'''
+                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+            post {
+                always {
+                sh '''
+                docker image prune -af --filter "until=24h"
+                '''
+                }
             }
         }
-   }
-
-    stage('Continue_Build') {
-        steps {
-            sh'''
-            docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-            docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-            '''
-        }
-        post {
-            always {
-            sh '''
-            docker image prune -af --filter "until=24h"
-            '''
-            }
-        }
-    }
-    stage('Trigger Deploy') {
-        steps {
-            build job: 'BackendDeploy', wait: false, parameters: [
-                string(name: 'BACKEND_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")]
+        stage('Trigger Deploy') {
+            steps {
+                build job: 'BackendDeploy', wait: false, parameters: [
+                    string(name: 'BACKEND_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
+                ]
             }
         }
     }
