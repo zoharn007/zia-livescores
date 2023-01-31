@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: zia-frontend
+  name: zia-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zia-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zia-frontend
+    spec:
+      containers:
+      - image: 352708296901.dkr.ecr.eu-west-1.amazonaws.com/{{zia-frontend:test9}}
+        name: webapp
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 80
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: zia-frontend
+  labels:
+    run: zia-frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: zia-frontend
+  type: LoadBalancer
