@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>Competition Data</title>
+    <style>
+      body {
+        background-image: url(https://www.example.com/background.jpg);
+        background-size: cover;
+        font-family: Arial, sans-serif;
+      }
+      table {
+        margin: 50px auto;
+        border-collapse: collapse;
+        width: 80%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        font-size: 16px;
+      }
+      th {
+        background-color: #ddd;
+        font-weight: bold;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      h1 {
+        text-align: center;
+        color: white;
+        margin-top: 50px;
+        font-size: 36px;
+      }
+      .notify-bell {
+        background-color: red;
+        border: none;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Competition Data</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Home</th>
+          <th>Score</th>
+          <th>Away</th>
+          <th>Competition</th>
+          <th>Time</th>
+          <th>Notify Me</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+          <tr>
+            <td>{{ item.Date }}</td>
+            <td>{{ item.Home }}</td>
+            <td>{{ item.Score }}</td>
+            <td>{{ item.Away }}</td>
+            <td>{{ item.Competition }}</td>
+            <td>{{ item.Time }}</td>
+            <td><button class="notify-bell"></button></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script>
+      const notifyBell = document.querySelectorAll('.notify-bell');
+      notifyBell.forEach(bell => {
+        bell.addEventListener('click', function() {
+          this.style.backgroundColor =
+            this.style.backgroundColor === 'red' ? 'green' : 'red';
+        });
+      });
+    </script>
+  </body>
+</html>

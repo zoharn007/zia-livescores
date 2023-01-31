@@ -1,12 +1,11 @@
 pipeline {
     agent {
         docker {
-        label 'jenkins-general-docker'
-        image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/zoharn-jenkins-agent:1'
-        args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+            label 'jenkins-general-docker'
+            image '352708296901.dkr.ecr.eu-west-1.amazonaws.com/ariel-jenkins-agent2:4'
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-
     stages {
         stage('Unittest Bot') {
             steps {

@@ -9,13 +9,13 @@ pipeline {
     environment {
         APP_ENV = "dev"
 //          on jenkins
-        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"
+        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/FrontendDeploy"
 //         on jenkins agent
-        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendDeploy"
+        WORKSPACE = "/home/ec2-user/workspace/zia-dev/FrontendDeploy"
     }
 
     parameters {
-        string(name: 'BACKEND_IMAGE_NAME')
+        string(name: 'FRONTEND_IMAGE_NAME')
     }
 
     stages {
@@ -32,12 +32,12 @@ pipeline {
                 K8S_CONFIGS=$WORKSPACE/infra/k8s
 
                 # replace placeholders in YAML k8s files
-                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml APP_ENV $APP_ENV
+                bash common/replaceInFile.sh $K8S_CONFIGS/frontend.yaml APP_ENV $APP_ENV
 
                 # apply the configurations to k8s cluster
 
-                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
-                /usr/local/bin/kubectl apply -f $K8S_CONFIGS/backend.yaml
+                bash common/replaceInFile.sh $K8S_CONFIGS/frontend.yaml FRONTEND_IMAGE $FRONTEND_IMAGE_NAME
+                /usr/local/bin/kubectl apply -f $K8S_CONFIGS/frontend.yaml
                 '''
             }
         }

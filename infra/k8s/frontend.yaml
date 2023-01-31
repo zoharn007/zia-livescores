@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app-{{APP_ENV}}
+  namespace: {{APP_ENV}}
+  labels:
+    app: frontend-app-{{APP_ENV}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app-{{APP_ENV}}
+  template:
+    metadata:
+      labels:
+        app: frontend-app-{{APP_ENV}}
+    spec:
+      containers:
+      - name: frontend-app-{{APP_ENV}}
+        image: {{FRONTEND_IMAGE}}

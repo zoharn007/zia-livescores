@@ -1,8 +1,9 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.11.1-slim-bullseye
 WORKDIR /app
-#ENV APP_PATH="C:\Final_Project\services\backend"
-ENV APP_PATH=services/backend
+ENV APP_PATH=/app/services/backend
 COPY . .
 RUN apt-get update && apt-get install -y awscli
-RUN pip install -r requirements.txt
-CMD ["python3", "Backend.py"]
+RUN apt remove -fy libaom0:amd64
+RUN pip install -r /app/services/backend/requirements.txt
+
+CMD ["python3", "/app/services/backend/backend.py"]

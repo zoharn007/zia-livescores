@@ -9,11 +9,11 @@ pipeline {
     environment {
         REGISTRY_URL = "352708296901.dkr.ecr.eu-west-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "zia-backend"
+        IMAGE_NAME = "zia-frontend"
 //          on jenkins
-        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/BackendBuild"
+        WORKSPACE2 = "/var/lib/jenkins/workspace/zia-dev/FrontendBuild"
 //         on jenkins agent
-        WORKSPACE = "/home/ec2-user/workspace/zia-dev/BackendBuild"
+        WORKSPACE = "/home/ec2-user/workspace/zia-dev/FrontendBuild"
     }
     stages {
         stage('Build') {
@@ -22,7 +22,7 @@ pipeline {
                     pwd
                     cd $WORKSPACE
                     aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $REGISTRY_URL
-                    docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/backend/Dockerfile
+                    docker build -t $IMAGE_NAME:$IMAGE_TAG . -f services/frontend/Dockerfile
                 '''
             }
         }
@@ -43,8 +43,8 @@ pipeline {
         }
         stage('Trigger Deploy') {
             steps {
-                build job: 'BackendDeploy', wait: false, parameters: [
-                    string(name: 'BACKEND_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
+                build job: 'FrontendDeploy', wait: false, parameters: [
+                    string(name: 'FRONTEND_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
                 ]
             }
         }
