@@ -1,4 +1,3 @@
-from time import sleep
 import time
 import requests
 import json
@@ -14,7 +13,7 @@ def GetDataFromFootballAPI():
     apiSecret = key2.apiSecret
     keyParam = { "key" : apiKey, "secret" : apiSecret }
 
-    response = requests.get(baseUrl + "scores/live.json", params=keyParam)  # READ
+    response = requests.get(baseUrl + "scores/live.json", params=keyParam) # READ
 
     x = json.loads(response.text)
 
@@ -22,7 +21,7 @@ def GetDataFromFootballAPI():
 
 
 def UpdateDatabaseWithMatchInformation(match):
-    baseUrlBackend = "http://backend-app-dev.dev:5000/"
+    baseUrlBackend = "http://127.0.0.1:5000/"
 
     try:
         parameters = \
@@ -60,17 +59,15 @@ def UpdateDatabaseWithMatchInformation(match):
     print("test")
     return response
     # print("\n\n\n\n\n\n" + parameters + "\n\n\n\n\n\n")
+   # response = requests.get(baseUrlBackend + "repeater", json=parameters) -
 
-
-# response = requests.get(baseUrlBackend + "repeater", json=parameters) -
-
-# return response -
+    #return response -
 
 # def ClearOldMatchesFromDailyMatchesAndMoveToHistory():
 #     return
 
 def CheckForFinishedMatches():
-    baseUrlBackend = "http://backend-app-dev.dev:5000/"
+    baseUrlBackend = "http://127.0.0.1:5000/"
 
     try:
         response = requests.get(baseUrlBackend + "checkMatches")
@@ -92,7 +89,6 @@ def GetDataFromFootballAPIAndUpdateDatabase():
     matches = jsonData['data']['match']
     for match in matches:
         UpdateDatabaseWithMatchInformation(match)
-
 
 moveToHistory = True
 prevTime = 1
