@@ -12,7 +12,7 @@ pipeline {
 //          on jenkins
         WORKSPACE2 = "/var/lib/jenkins/workspace/zia-prod/RepeaterBuild"
 //         on jenkins agent
-        WORKSPACE = "/home/ec2-user/workspace/zia-prod/RepeaterBuild"
+        WORKSPACE = "/home/ec2-user/workspace/zia-prod/RepeaterDeploy"
     }
 
     parameters {
@@ -29,7 +29,6 @@ pipeline {
 
         stage('Deploy to EKS') {
             steps {
-
                 echo 'Deploy to EKS'
                 sh '''
                     K8S_CONFIGS=$WORKSPACE/infra/k8s
