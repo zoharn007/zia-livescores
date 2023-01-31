@@ -21,7 +21,7 @@ def GetDataFromFootballAPI():
 
 
 def UpdateDatabaseWithMatchInformation(match):
-    baseUrlBackend = "http://127.0.0.1:5000/"
+    baseUrlBackend = "http://backend-app-dev.dev:5000/"
 
     try:
         parameters = \
@@ -67,7 +67,7 @@ def UpdateDatabaseWithMatchInformation(match):
 #     return
 
 def CheckForFinishedMatches():
-    baseUrlBackend = "http://127.0.0.1:5000/"
+    baseUrlBackend = "http://backend-app-dev.dev:5000/"
 
     try:
         response = requests.get(baseUrlBackend + "checkMatches")
