@@ -36,8 +36,8 @@ pipeline {
 
                 # apply the configurations to k8s cluster
 
-                bash common/replaceInFile.sh $K8S_CONFIGS/backend.yaml BACKEND_IMAGE $BACKEND_IMAGE_NAME
-                /usr/local/bin/kubectl apply -f $K8S_CONFIGS/backend.yaml
+                bash common/replaceInFile.sh $K8S_CONFIGS/frontend.yaml FRONTEND_IMAGE $FRONTEND_IMAGE_NAME
+                /usr/local/bin/kubectl apply -f $K8S_CONFIGS/frontend.yaml
                 '''
             }
         }
