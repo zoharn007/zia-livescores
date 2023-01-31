@@ -41,7 +41,7 @@ pipeline {
                     bash common/replaceInFile.sh $K8S_CONFIGS/repeater.yaml APISECRET $(echo -n $APISECRET | base64)
                     # apply the configurations to k8s cluster
                     pwd
-                    /usr/local/bin/kubectl apply -f $K8S_CONFIGS/repeater.yaml
+                    /usr/local/bin/kubectl apply -f $K8S_CONFIGS/repeater.yaml -n prod
                     '''
                     }
             }
