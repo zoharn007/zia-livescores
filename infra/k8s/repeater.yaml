@@ -16,6 +16,7 @@ type: Opaque
 data:
   token2: {{APISECRET}}
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,11 +40,6 @@ spec:
           volumeMounts:
             - name: repeater-token
               mountPath: "/app/secrets/"
-              subPath: token
-              readOnly: true
-            - name: repeater-token2
-              mountPath: "/app/secrets2/"
-              subPath: token2
               readOnly: true
       volumes:
         - name: repeater-token
@@ -52,9 +48,3 @@ spec:
             items:
               - key: token
                 path: "key.py"
-        - name: repeater-token2
-          secret:
-            secretName: apisecret
-            items:
-              - key: token2
-                path: "key2.py"
