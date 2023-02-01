@@ -41,6 +41,9 @@ spec:
             - name: repeater-token
               mountPath: "/app/secrets/"
               readOnly: true
+        - name: repeater-app-{{APP_ENV}}
+          image: {{REPEATER_IMAGE}}
+          volumeMounts:
             - name: repeater-token2
               mountPath: "/app/secrets2/"
               readOnly: true
