@@ -42,7 +42,7 @@ spec:
               subPath: token
               readOnly: true
             - name: repeater-token2
-              mountPath: "/app/secrets/"
+              mountPath: "/app/secrets2/"
               subPath: token2
               readOnly: true
       volumes:
