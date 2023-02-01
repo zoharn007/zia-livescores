@@ -16,7 +16,6 @@ type: Opaque
 data:
   token2: {{APISECRET}}
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
