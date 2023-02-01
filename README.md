@@ -7,6 +7,7 @@
 
 
 <img src="https://www.int-college.co.il/wp-content/webp-express/webp-images/uploads/2020/04/cropped-logo_in_cube.png.webp" alt="drawing" style="width:200px;"/>
+![image](https://user-images.githubusercontent.com/98559809/216077030-90d243f8-3133-486b-bbbb-988e42a79cd7.png)
 
 #### ***Contributers***
 - ***Zohar***
